@@ -2,6 +2,7 @@
 
 ### Team-Member
 |Name|Email|
+|----------|---------------|
 |Sascha Frossard|sascha.frossard@students.fhnw.ch|
 |Selina Hodel|selina.hodel@students.fhnw.ch|
 |Denis Moser|denis.moser@students.fhnw.ch|
