@@ -15,9 +15,11 @@ Nowadays, it is possible to understand cancer, with the help of DNA sequencing a
 |Denis Moser|denis.moser@students.fhnw.ch|
 |Marvin Marqua|marvin.marqua@students.fhnw.ch|  
   
-**Coach:**
-    - Andreas Martin
-    - Charuta Panda
+**Coach:**  
+- Andreas Martin
+- Charuta Panda
+  
+---
 
 ### AS-IS Process
 This chapter provides insights into the as-is process and its identified issues. 
@@ -27,6 +29,8 @@ This chapter provides insights into the as-is process and its identified issues.
 #### Process Description
 
 #### Identified Issues and Problems
+
+---
 
 ### TO-BE Process
 This chapter provides the optimized process with the related benefits and improvments.
