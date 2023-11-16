@@ -27,7 +27,7 @@ Therefore, they implemented the process to create a medical report based on the 
 This chapter provides insights into the as-is process and its identified issues. 
 
 #### Process Model
-[as-is process model](/00_Assets/AS-IS_Process.png)
+[as-is process model](00_Assets/AS-IS_Process.png)
 
 #### Process Description
 
