@@ -120,6 +120,8 @@ This chapter provides the optimized process with the related benefits and improv
 |abort order        | orderId, sampleId, customerEmail      | https://hook.eu2.make.com/7znnj319uhp4a1xuryaunn87gla72dcf   |
 |notify customer    | orderId, sampleId, customerEmail,     | https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge   |
 |                   | orderFromComplete, sampleAcceptanceOk |                                                              |
+|registerOrderToPIS | sampleId, orderId                             | <https://hook.eu2.make.com/ido2q831oxvbl0pwq4njjbyloh8rneuu> | 
+|registerOrderToOMS | sampleId, orderId, orderStatus, orderInternal | <https://hook.eu2.make.com/4s0vhghjtmba9gshrsm2nk4mznu40yeq> | 
 
 ### Process Description
 
