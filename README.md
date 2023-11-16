@@ -1,8 +1,7 @@
 # Team-Moevenpick
 
 ### Project description
-Nowadays it is possible to understand cancer, with the help of DNA sequencing as well as complex diagnostic procedures better then years before. In order to support doctors to understand the patients cancer even better, it is mandatory to have an well defined process which covers the needed steps from the initial order to the finally send report.  
-Within Switzerland the Unispital Zürich acts as one of the providers for the aboved described procedure. Therefore they implemented the process to create a medical report based on the incoming order and performed DNA sequencing. This "Order to Report" process requires a huge variaty of information systems, supporting actions, medical doctors and communication flows. Therefore, the project will focus on reviewing the AS-IS process to gather information for improving actions, communication and information flows. 
+Nowadays, it is possible to understand cancer, with the help of DNA sequencing as well as complex diagnostic procedures better than years before. In order to support doctors to understand the patients cancer even better, it is mandatory to have a well-defined process which covers the needed steps from the initial order to the finally send report.  Within Switzerland, the Unispital Zürich acts as one of the providers for the above described procedure. Therefore, they implemented the process to create a medical report based on the incoming order and performed DNA sequencing. This "Order to Report" process requires a huge variety of information systems, supporting actions, medical doctors and communication flows. Therefore, the project will focus on reviewing the AS-IS process to gather information for improving actions, communication and information flows. 
 
 ### Project Goal
 1. Automate process steps which for now include a huge amount of manual labour. 
