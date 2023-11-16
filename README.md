@@ -42,6 +42,7 @@ This chapter provides the optimized process with the related benefits and improv
 #### Process Model
 
 ##### Process variables
+
 | Variable          | Description                           | Data Type    |
 |-------------------|---------------------------------------|--------------|
 |orderId            | unique order id                       | string       |
@@ -51,6 +52,13 @@ This chapter provides the optimized process with the related benefits and improv
 |orderFromComplete  |True if order form is complete         | boolean       |
 |sampleAcceptanceOk | true if sample acceptance is fullfilled | boolean     |
 |customerEmail      | email of the ordering client          | string        |
+
+#### Services
+
+| Service           | Parameters                            | url    |
+|-------------------|---------------------------------------|--------------|
+|registerSample     | sampleId, sampleType                  | <https://hook.eu2.make.com/ycuwr6q9br1a17isbfccp6kpsvvcg3fd> |
+|updateOrderStatus  | orderId, orderStatus                  | <https://hook.eu2.make.com/swvbhj5qjw62gad48ivy6r5704n55662> |
 
 #### Process Description
 
