@@ -118,8 +118,7 @@ This chapter provides the optimized process with the related benefits and improv
 |registerSample     | sampleId, sampleType                  | <https://hook.eu2.make.com/ycuwr6q9br1a17isbfccp6kpsvvcg3fd> |
 |updateOrderStatus  | orderId, orderStatus                  | <https://hook.eu2.make.com/swvbhj5qjw62gad48ivy6r5704n55662> |
 |abort order        | orderId, sampleId, customerEmail      | https://hook.eu2.make.com/7znnj319uhp4a1xuryaunn87gla72dcf   |
-|notify customer    | orderId, sampleId, customerEmail,     | https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge   |
-|                   | orderFromComplete, sampleAcceptanceOk |                                                              |
+|notify customer    | orderId, sampleId, customerEmail,<br>orderFromComplete, sampleAcceptanceOk| https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge   |
 |registerOrderToPIS | sampleId, orderId                             | <https://hook.eu2.make.com/ido2q831oxvbl0pwq4njjbyloh8rneuu> | 
 |registerOrderToOMS | sampleId, orderId, orderStatus, orderInternal | <https://hook.eu2.make.com/4s0vhghjtmba9gshrsm2nk4mznu40yeq> | 
 
