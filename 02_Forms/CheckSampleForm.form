@@ -66,84 +66,146 @@
           "value": "false"
         }
       ],
-      "label": " Does the sample contain more than 20% tumor content?",
+      "label": "Does the sample contain more than 20% tumor content?",
       "type": "radio",
       "layout": {
         "row": "Row_1afzhku",
         "columns": null
       },
       "id": "Field_0rl3c26",
-      "key": "field_0u913tf",
+      "key": "field_0u913tf_tumor_content",
       "defaultValue": "<none>",
       "properties": {}
     },
     {
-      "values": [
-        {
-          "label": "The received tubes are not expired  ",
-          "value": "tubesOK"
-        },
-        {
-          "label": "The package contains at least two to three slices",
-          "value": "slicesOK"
-        }
-      ],
-      "label": "Checklist FFPE Samples",
-      "type": "checklist",
+      "text": "Checklist FFPE Samples",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_1h9vsdl",
+        "columns": null
+      },
+      "id": "Field_0wz4eq9",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"FFPE\"))"
+      }
+    },
+    {
+      "label": "The received tubes are not expired  ",
+      "type": "checkbox",
       "layout": {
         "row": "Row_0rlvfvx",
         "columns": null
       },
-      "id": "Field_1hlwxfe",
-      "key": "field_01rwww2"
+      "id": "Field_0hgyh2g",
+      "key": "field_1wbwwxu_ffpe_tubes",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"FFPE\"))"
+      }
     },
     {
-      "values": [
-        {
-          "label": "Samples where received earlier than 24 hours ago",
-          "value": "dnaTimeOK"
-        },
-        {
-          "label": "The samples contain a minimum yield",
-          "value": "dnaMinYieldOK"
-        },
-        {
-          "label": "Maximum 60 µl of DNA volume contained in sample ",
-          "value": "dnaVolumeOK"
-        }
-      ],
-      "label": "Checklist DNA Samples",
-      "type": "checklist",
+      "label": "The package contains at least two to three slices",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1x4w4tk",
+        "columns": null
+      },
+      "id": "Field_1hbz9mw",
+      "key": "field_1pjgpqw_ffpe_slices",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"FFPE\"))"
+      }
+    },
+    {
+      "text": "Checklist DNA Samples",
+      "label": "Text view",
+      "type": "text",
       "layout": {
         "row": "Row_1r7uiim",
         "columns": null
       },
-      "id": "Field_1sz7xxu",
-      "key": "field_1solhg6",
+      "id": "Field_07hjhkl",
       "conditional": {
-        "hide": "=contains(field_0a4ef3i, \"FFPE\")"
-      },
-      "properties": {}
+        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+      }
     },
     {
-      "values": [
-        {
-          "label": "Sample is not older than 14 days",
-          "value": "boneTimeOK"
-        },
-        {
-          "label": "At least 2 cell-free tubes with bone marrow arrived",
-          "value": "boneTubesOK"
-        }
-      ],
-      "label": "Bone marrow",
-      "type": "checklist",
+      "label": "Maximum 60 µl of DNA volume contained in sample ",
+      "type": "checkbox",
       "layout": {
-        "row": "Row_1sa2w48",
+        "row": "Row_0ki7rvn",
         "columns": null
       },
-      "id": "Field_1ms9mjb",
-      "key": "field_0bebmtg"
+      "id": "Field_1ykjpc6",
+      "key": "field_1unglw5_dna_volume",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+      }
+    },
+    {
+      "label": "The samples contain a minimum yield",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1i87exd",
+        "columns": null
+      },
+      "id": "Field_105vz5n",
+      "key": "field_152dkxm_dna_yield",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+      }
+    },
+    {
+      "label": "Samples where received earlier than 24 hours ago",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0zsidcc",
+        "columns": null
+      },
+      "id": "Field_1osmwo2",
+      "key": "field_1crldde_dna_time",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+      }
+    },
+    {
+      "text": "Checklist Bone marrow",
+      "label": "Text view",
+      "type": "text",
+      "layout": {
+        "row": "Row_14oyri5",
+        "columns": null
+      },
+      "id": "Field_14mazqw",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"Bone\"))"
+      }
+    },
+    {
+      "label": "At least 2 cell-free tubes with bone marrow arrived",
+      "type": "checkbox",
+      "layout": {
+        "row": null,
+        "columns": null
+      },
+      "id": "Field_072jur7",
+      "key": "field_1jaxerq_bone_volume",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"Bone\"))"
+      }
+    },
+    {
+      "label": "Sample is not older than 14 days",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_1lz7hr3",
+        "columns": null
+      },
+      "id": "Field_16jilpy",
+      "key": "field_0zz95a6_bone_time",
+      "conditional": {
+        "hide": "=not(contains(field_0a4ef3i,\"Bone\"))"
+      }
     }
   ],
   "type": "default",
