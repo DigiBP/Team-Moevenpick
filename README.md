@@ -110,6 +110,7 @@ This chapter provides the optimized process with the related benefits and improv
 |orderFromComplete  |True if order form is complete         | boolean       |
 |sampleAcceptanceOk | true if sample acceptance is fullfilled | boolean     |
 |customerEmail      | email of the ordering client          | string        |
+|failureReason      | reason why order failed               | string        |
 
 ### Services
 
