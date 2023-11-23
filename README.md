@@ -1,5 +1,9 @@
 # Team-Moevenpick 🍨
 
+## Running workflow instance
+
+<https://digibp.herokuapp.com/camunda/app/cockpit/default/> with Tennant ID *moevenpick* the workflow name is *Process_to_be_final*.
+
 ## Project description
 
 Nowadays, it is possible to understand cancer, with the help of DNA sequencing as well as complex diagnostic procedures better than years before. In order to support doctors to understand the patients cancer even better, it is mandatory to have a well-defined process which covers the needed steps from the initial order to the finally send report.  Within Switzerland, the Unispital Zürich acts as one of the providers for the above described procedure.  
