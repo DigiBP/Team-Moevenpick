@@ -87,7 +87,7 @@
       },
       "id": "Field_0wz4eq9",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"FFPE\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"ffpe\"))"
       }
     },
     {
@@ -100,7 +100,7 @@
       "id": "Field_0hgyh2g",
       "key": "field_1wbwwxu_ffpe_tubes",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"FFPE\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"ffpe\"))"
       }
     },
     {
@@ -113,7 +113,7 @@
       "id": "Field_1hbz9mw",
       "key": "field_1pjgpqw_ffpe_slices",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"FFPE\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"ffpe\"))"
       }
     },
     {
@@ -126,7 +126,7 @@
       },
       "id": "Field_07hjhkl",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"dna\"))"
       }
     },
     {
@@ -139,8 +139,10 @@
       "id": "Field_1ykjpc6",
       "key": "field_1unglw5_dna_volume",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
-      }
+        "hide": "=not(contains(field_0a4ef3i,\"dna\"))"
+      },
+      "readonly": false,
+      "disabled": false
     },
     {
       "label": "The samples contain a minimum yield",
@@ -152,7 +154,7 @@
       "id": "Field_105vz5n",
       "key": "field_152dkxm_dna_yield",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"dna\"))"
       }
     },
     {
@@ -165,7 +167,7 @@
       "id": "Field_1osmwo2",
       "key": "field_1crldde_dna_time",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"DNA\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"dna\"))"
       }
     },
     {
@@ -178,7 +180,7 @@
       },
       "id": "Field_14mazqw",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"Bone\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"bonemarrow\"))"
       }
     },
     {
@@ -191,7 +193,7 @@
       "id": "Field_072jur7",
       "key": "field_1jaxerq_bone_volume",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"Bone\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"bonemarrow\"))"
       }
     },
     {
@@ -204,7 +206,7 @@
       "id": "Field_16jilpy",
       "key": "field_0zz95a6_bone_time",
       "conditional": {
-        "hide": "=not(contains(field_0a4ef3i,\"Bone\"))"
+        "hide": "=not(contains(field_0a4ef3i,\"bonemarrow\"))"
       }
     }
   ],

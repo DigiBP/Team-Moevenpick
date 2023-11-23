@@ -30,8 +30,9 @@
         <bpmn:flowNodeRef>Activity_07vy0i2</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_09buhwk</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0z3kfy4</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_1qo565h</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Event_14roj15</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_03mbemt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_1k0ga80</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_005dohs" name="Head of Lab">
         <bpmn:flowNodeRef>Activity_0jeveuu</bpmn:flowNodeRef>
@@ -139,25 +140,10 @@
       </bpmn:dataOutputAssociation>
     </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="Gateway_0z3kfy4" name="Sample ok?">
-      <bpmn:incoming>Flow_0got51o</bpmn:incoming>
+      <bpmn:incoming>Flow_17ahkh3</bpmn:incoming>
       <bpmn:outgoing>Flow_1scgzjp</bpmn:outgoing>
       <bpmn:outgoing>Flow_0h5y3oe</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Activity_1qo565h" name="Dummy Check sample">
-      <bpmn:extensionElements>
-        <camunda:formData>
-          <camunda:formField id="sampleAcceptanceOk" label="Sample ok?" type="boolean">
-            <camunda:properties />
-            <camunda:validation />
-          </camunda:formField>
-        </camunda:formData>
-        <camunda:inputOutput>
-          <camunda:outputParameter name="failureReason">Sample acceptance not ok</camunda:outputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
-      <bpmn:incoming>Flow_06078kc</bpmn:incoming>
-      <bpmn:outgoing>Flow_0got51o</bpmn:outgoing>
-    </bpmn:userTask>
     <bpmn:userTask id="Activity_04cw2fe" name="Check Order">
       <bpmn:extensionElements>
         <camunda:formData>
@@ -379,9 +365,8 @@ out = JSON.stringify(
     <bpmn:sequenceFlow id="Flow_01winz0" sourceRef="Gateway_0im2hlr" targetRef="Activity_09buhwk" />
     <bpmn:sequenceFlow id="Flow_012vze5" sourceRef="Activity_07vy0i2" targetRef="Gateway_0n8gwz8" />
     <bpmn:sequenceFlow id="Flow_0o860bc" sourceRef="Activity_09buhwk" targetRef="Gateway_0n8gwz8" />
-    <bpmn:sequenceFlow id="Flow_06078kc" sourceRef="Gateway_0n8gwz8" targetRef="Activity_1qo565h" />
+    <bpmn:sequenceFlow id="Flow_06078kc" sourceRef="Gateway_0n8gwz8" targetRef="Activity_03mbemt" />
     <bpmn:sequenceFlow id="Flow_1vu2y7p" sourceRef="Gateway_12q9xor" targetRef="Activity_18wb6rs" />
-    <bpmn:sequenceFlow id="Flow_0got51o" sourceRef="Activity_1qo565h" targetRef="Gateway_0z3kfy4" />
     <bpmn:sequenceFlow id="Flow_1scgzjp" name="No" sourceRef="Gateway_0z3kfy4" targetRef="Gateway_0u0e33u">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!sampleAcceptanceOk}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -416,16 +401,29 @@ out = JSON.stringify(
     <bpmn:sequenceFlow id="Flow_0ykdaqu" sourceRef="Activity_1tp5gia" targetRef="Activity_0bqpu1r" />
     <bpmn:sequenceFlow id="Flow_1whglpg" sourceRef="Event_14roj15" targetRef="Gateway_0u0e33u" />
     <bpmn:sequenceFlow id="Flow_00o0k85" sourceRef="Gateway_0u0e33u" targetRef="Activity_1tp5gia" />
+    <bpmn:userTask id="Activity_03mbemt" name="Check Sample" camunda:formRef="Form_0kfq2mi" camunda:formRefBinding="deployment">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="field_0a4ef3i">${sampleType}</camunda:inputParameter>
+          <camunda:inputParameter name="field_0p1n2fb">${sampleId}</camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_06078kc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0g3n728</bpmn:outgoing>
+      <bpmn:property id="Property_0qcfow4" name="__targetRef_placeholder" />
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Activity_1k0ga80" name="Calc Result" camunda:type="external" camunda:topic="calcSampleResult">
+      <bpmn:incoming>Flow_0g3n728</bpmn:incoming>
+      <bpmn:outgoing>Flow_17ahkh3</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0g3n728" sourceRef="Activity_03mbemt" targetRef="Activity_1k0ga80" />
+    <bpmn:sequenceFlow id="Flow_17ahkh3" sourceRef="Activity_1k0ga80" targetRef="Gateway_0z3kfy4" />
     <bpmn:textAnnotation id="TextAnnotation_1egafhq">
       <bpmn:text>User only registers data into formular which then will be transformed per Receiver as well as sent to Lims and OMS automatically.
 
 - Storing Datapoint Sample Type for creating acceptance criteria formular</bpmn:text>
     </bpmn:textAnnotation>
-    <bpmn:textAnnotation id="TextAnnotation_095tpfs">
-      <bpmn:text>@Marvin Please replace with your implementation</bpmn:text>
-    </bpmn:textAnnotation>
     <bpmn:association id="Association_0t5pjja" sourceRef="Activity_01hccua" targetRef="TextAnnotation_1egafhq" />
-    <bpmn:association id="Association_1uwhf70" sourceRef="Activity_1qo565h" targetRef="TextAnnotation_095tpfs" />
   </bpmn:process>
   <bpmn:process id="Process_13u0xvz" isExecutable="false" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -434,24 +432,16 @@ out = JSON.stringify(
         <dc:Bounds x="160" y="80" width="3020" height="1720" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1k09092_di" bpmnElement="Lane_1k09092" isHorizontal="true">
-        <dc:Bounds x="190" y="960" width="2990" height="840" />
+      <bpmndi:BPMNShape id="Lane_005dohs_di" bpmnElement="Lane_005dohs" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="2990" height="260" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0g3gnqk_di" bpmnElement="Lane_0g3gnqk" isHorizontal="true">
         <dc:Bounds x="190" y="340" width="2990" height="620" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_005dohs_di" bpmnElement="Lane_005dohs" isHorizontal="true">
-        <dc:Bounds x="190" y="80" width="2990" height="260" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1egafhq_di" bpmnElement="TextAnnotation_1egafhq">
-        <dc:Bounds x="1389" y="380" width="220" height="122" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_095tpfs_di" bpmnElement="TextAnnotation_095tpfs">
-        <dc:Bounds x="1880" y="512" width="170" height="65" />
+      <bpmndi:BPMNShape id="Lane_1k09092_di" bpmnElement="Lane_1k09092" isHorizontal="true">
+        <dc:Bounds x="190" y="960" width="2990" height="840" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0mcu79h_di" bpmnElement="Activity_01hccua" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
@@ -490,9 +480,6 @@ out = JSON.stringify(
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2144.5" y="670" width="59" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1azh5wz_di" bpmnElement="Activity_1qo565h">
-        <dc:Bounds x="1900" y="637" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_0nds1mi_di" bpmnElement="Activity_04cw2fe" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
         <dc:Bounds x="440" y="1220" width="100" height="80" />
@@ -583,14 +570,16 @@ out = JSON.stringify(
       <bpmndi:BPMNShape id="Activity_1h47o5v_di" bpmnElement="Activity_1tp5gia">
         <dc:Bounds x="2520" y="190" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_0t5pjja_di" bpmnElement="Association_0t5pjja">
-        <di:waypoint x="1480" y="637" />
-        <di:waypoint x="1480" y="502" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1uwhf70_di" bpmnElement="Association_1uwhf70">
-        <di:waypoint x="1988" y="637" />
-        <di:waypoint x="2045" y="577" />
-      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_1kaamoy_di" bpmnElement="Activity_03mbemt" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="1810" y="637" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0hqd2vr_di" bpmnElement="Activity_1k0ga80" bioc:stroke="#205022" bioc:fill="#c8e6c9" color:background-color="#c8e6c9" color:border-color="#205022">
+        <dc:Bounds x="1960" y="637" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1egafhq_di" bpmnElement="TextAnnotation_1egafhq">
+        <dc:Bounds x="1389" y="380" width="220" height="122" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0gprey8_di" bpmnElement="Event_14roj15">
         <dc:Bounds x="1331" y="619" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -627,16 +616,12 @@ out = JSON.stringify(
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_06078kc_di" bpmnElement="Flow_06078kc">
         <di:waypoint x="1794" y="677" />
-        <di:waypoint x="1900" y="677" />
+        <di:waypoint x="1810" y="677" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1vu2y7p_di" bpmnElement="Flow_1vu2y7p">
         <di:waypoint x="1210" y="1005" />
         <di:waypoint x="1210" y="677" />
         <di:waypoint x="1279" y="677" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0got51o_di" bpmnElement="Flow_0got51o">
-        <di:waypoint x="2000" y="677" />
-        <di:waypoint x="2085" y="677" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1scgzjp_di" bpmnElement="Flow_1scgzjp">
         <di:waypoint x="2110" y="652" />
@@ -652,21 +637,6 @@ out = JSON.stringify(
         <bpmndi:BPMNLabel>
           <dc:Bounds x="2116" y="918" width="18" height="14" />
         </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_02d5hiw_di" bpmnElement="Flow_02d5hiw">
-        <di:waypoint x="1790" y="1645" />
-        <di:waypoint x="1790" y="1710" />
-        <di:waypoint x="2410" y="1710" />
-        <di:waypoint x="2410" y="255" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="1802" y="1483" width="15" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1whglpg_di" bpmnElement="Flow_1whglpg">
-        <di:waypoint x="1349" y="619" />
-        <di:waypoint x="1349" y="130" />
-        <di:waypoint x="2410" y="130" />
-        <di:waypoint x="2410" y="205" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_15mudci_di" bpmnElement="Flow_15mudci">
         <di:waypoint x="368" y="1260" />
@@ -745,6 +715,15 @@ out = JSON.stringify(
         <di:waypoint x="1160" y="1620" />
         <di:waypoint x="1765" y="1620" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_02d5hiw_di" bpmnElement="Flow_02d5hiw">
+        <di:waypoint x="1790" y="1645" />
+        <di:waypoint x="1790" y="1710" />
+        <di:waypoint x="2410" y="1710" />
+        <di:waypoint x="2410" y="255" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1802" y="1483" width="15" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_18i44yz_di" bpmnElement="Flow_18i44yz">
         <di:waypoint x="2800" y="230" />
         <di:waypoint x="2880" y="230" />
@@ -757,9 +736,27 @@ out = JSON.stringify(
         <di:waypoint x="2620" y="230" />
         <di:waypoint x="2700" y="230" />
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1whglpg_di" bpmnElement="Flow_1whglpg">
+        <di:waypoint x="1349" y="619" />
+        <di:waypoint x="1349" y="130" />
+        <di:waypoint x="2410" y="130" />
+        <di:waypoint x="2410" y="205" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_00o0k85_di" bpmnElement="Flow_00o0k85">
         <di:waypoint x="2435" y="230" />
         <di:waypoint x="2520" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0g3n728_di" bpmnElement="Flow_0g3n728">
+        <di:waypoint x="1910" y="677" />
+        <di:waypoint x="1960" y="677" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17ahkh3_di" bpmnElement="Flow_17ahkh3">
+        <di:waypoint x="2060" y="677" />
+        <di:waypoint x="2085" y="677" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0t5pjja_di" bpmnElement="Association_0t5pjja">
+        <di:waypoint x="1480" y="637" />
+        <di:waypoint x="1480" y="502" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="Participant_0y9zwl5_di" bpmnElement="Participant_0y9zwl5" isHorizontal="true">
         <dc:Bounds x="160" y="1890" width="600" height="250" />
@@ -777,13 +774,6 @@ out = JSON.stringify(
         <di:waypoint x="734" y="1170" />
         <di:waypoint x="753" y="1115" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1xyd0lc_di" bpmnElement="Flow_1xyd0lc">
-        <di:waypoint x="350" y="1890" />
-        <di:waypoint x="350" y="1278" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="356" y="1602" width="87" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="DataOutputAssociation_10vfrhu_di" bpmnElement="DataOutputAssociation_10vfrhu">
         <di:waypoint x="735" y="1350" />
         <di:waypoint x="749" y="1385" />
@@ -791,6 +781,13 @@ out = JSON.stringify(
       <bpmndi:BPMNEdge id="DataOutputAssociation_099ql52_di" bpmnElement="DataOutputAssociation_099ql52">
         <di:waypoint x="1123" y="1380" />
         <di:waypoint x="1138" y="1355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1xyd0lc_di" bpmnElement="Flow_1xyd0lc">
+        <di:waypoint x="350" y="1890" />
+        <di:waypoint x="350" y="1278" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="356" y="1602" width="87" height="14" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
