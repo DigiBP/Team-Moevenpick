@@ -138,6 +138,7 @@ tbd
 |notify customer    | orderId, sampleId, customerEmail,<br>orderFromComplete, sampleAcceptanceOk| https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge   |
 |registerOrderToPIS | sampleId, orderId                             | <https://hook.eu2.make.com/ido2q831oxvbl0pwq4njjbyloh8rneuu> | 
 |registerOrderToOMS | sampleId, orderId, orderStatus, orderInternal | <https://hook.eu2.make.com/4s0vhghjtmba9gshrsm2nk4mznu40yeq> | 
+|checkSample|       sampleType, formfields, sampleAcceptanceOk    | <https://deepnote.com/workspace/digbp-33286cab-ee00-4c9f-a201-adadf03e74e9/project/DigiBIP-Moevenpick-External-Task-13a3d82c-c958-4b10-bb5d-322eec9658e4/notebook/Service%20Integration%20using%20External%20Task-4993c5c6b67645c1b0a57cfbeb0461bc> |
 
 ### Benefits and Improvements
 
