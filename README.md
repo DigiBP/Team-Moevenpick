@@ -112,6 +112,7 @@ Throughout the course of the procedure, there are various instances where an ord
 - Incomplete order forms due to missing data.
 - Failure to meet the criteria for sample acceptance.
 - Non-receipt of a sample for more than 30 days after the order is placed.
+
 If a reason to abort the order occurs, the process transitions to the user task 'approve order abort.' The lab's head assesses the validity of the abortion and adjusts the automatically passed failure reason if necessary. Once the validation is complete, the order abortion is automatically recorded in the system, and the client is promptly notified through an automatically generated email. Subsequently, the entire process is terminated.
 
 ### Process Model
