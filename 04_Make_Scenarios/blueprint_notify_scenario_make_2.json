@@ -52,84 +52,8 @@
                         "type": "text"
                     },
                     {
-                        "name": "orderFromComplete",
-                        "type": "boolean"
-                    },
-                    {
-                        "name": "sampleAcceptanceOk",
-                        "type": "boolean"
-                    }
-                ]
-            }
-        },
-        {
-            "id": 5,
-            "module": "util:SetVariables",
-            "version": 1,
-            "parameters": {},
-            "mapper": {
-                "scope": "roundtrip",
-                "variables": [
-                    {
-                        "name": "Reason",
-                        "value": "{{if(1.orderFromComplete; ; \"complete the order form\") | if(1.sampleAcceptanceOk; ; \"meet sample accetance criteria\")}}"
-                    }
-                ]
-            },
-            "metadata": {
-                "designer": {
-                    "x": -68,
-                    "y": -73
-                },
-                "restore": {
-                    "expect": {
-                        "scope": {
-                            "label": "One cycle"
-                        },
-                        "variables": {
-                            "items": [
-                                null
-                            ]
-                        }
-                    }
-                },
-                "expect": [
-                    {
-                        "name": "variables",
-                        "spec": [
-                            {
-                                "name": "name",
-                                "type": "text",
-                                "label": "Variable name",
-                                "required": true
-                            },
-                            {
-                                "name": "value",
-                                "type": "any",
-                                "label": "Variable value"
-                            }
-                        ],
-                        "type": "array",
-                        "label": "Variables"
-                    },
-                    {
-                        "name": "scope",
-                        "type": "select",
-                        "label": "Variable lifetime",
-                        "required": true,
-                        "validate": {
-                            "enum": [
-                                "roundtrip",
-                                "execution"
-                            ]
-                        }
-                    }
-                ],
-                "interface": [
-                    {
-                        "name": "Reason",
-                        "type": "any",
-                        "label": "Reason"
+                        "name": "failureReason",
+                        "type": "text"
                     }
                 ]
             }
@@ -139,7 +63,7 @@
             "module": "email:ActionSendEmail",
             "version": 7,
             "parameters": {
-                "account": 561096,
+                "account": 626631,
                 "saveAfterSent": false
             },
             "mapper": {
@@ -149,7 +73,7 @@
                 ],
                 "bcc": [],
                 "from": "",
-                "text": "Dear Customer,\n\nWe regret to inform you that we are unable to proceed with the processing of your recent order no. {{1.orderId}}  with sample no. {{1.sampleId}} due to failure to {{5.Reason}}. \n\nIf you have any questions or concerns about the specific reasons for the order cancellation, please feel free to reach out to Lab Accessioning. They will be more than happy to provide you with further information and address any inquiries you may have.\n\nWe understand the inconvenience this may cause and sincerely apologize for any disruption to your plans. \n\nKind regards, \nLab Accessioning\n\n\n----This is an automatically generated email, please do not reply directly to this email address.----",
+                "text": "Dear Customer,\n\nWe regret to inform you that we are unable to proceed with the processing of your recent order no. {{1.orderId}}  with sample no. {{1.sampleId}}. The cancellation was due to: {{1.failureReason}} \n\nIf you have any questions or concerns about the specific reasons for the order cancellation, please feel free to reach out to Lab Accessioning. They will be more than happy to provide you with further information and address any inquiries you may have.\n\nWe understand the inconvenience this may cause and sincerely apologize for any disruption to your plans. \n\nKind regards, \nLab Accessioning\n\n\n----This is an automatically generated email, please do not reply directly to this email address.----",
                 "sender": "",
                 "headers": [],
                 "replyTo": "",
