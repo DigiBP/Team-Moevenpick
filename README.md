@@ -97,7 +97,19 @@ The abort order process can be triggered by multiple processes if e.g. the order
 
 This chapter provides the optimized process with the related benefits and improvments.
 
+### Process Description
+
+The TO-BE Process improves the steps from *Order processing* as described in the AS-IS Process. Everything else is out-of-scope for this project.
+
+make better
+
 ### Process Model
+
+tbd
+
+### Architecture
+
+tbd
 
 #### Process variables
 
@@ -122,10 +134,6 @@ This chapter provides the optimized process with the related benefits and improv
 |notify customer    | orderId, sampleId, customerEmail,<br>orderFromComplete, sampleAcceptanceOk| https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge   |
 |registerOrderToPIS | sampleId, orderId                             | <https://hook.eu2.make.com/ido2q831oxvbl0pwq4njjbyloh8rneuu> | 
 |registerOrderToOMS | sampleId, orderId, orderStatus, orderInternal | <https://hook.eu2.make.com/4s0vhghjtmba9gshrsm2nk4mznu40yeq> | 
-
-### Process Description
-
-The TO-BE Process improves the steps from *Order processing* as described in the AS-IS Process. Everything else is out-of-scope for this project.
 
 ### Benefits and Improvements
 
