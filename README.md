@@ -107,6 +107,17 @@ The TO-BE Process improves the steps from *Order processing* as described in the
 
 make better
 
+#### Process incoming sample
+
+After the sample is ordered, the process waits until the sample physically arrives:
+
+- **Receive Sample** The process has a interrupting timer boundary event that fires after 30days going to the **Abort Order** processing. The user can check the incoming sample and continue the process.
+- **Register Sample** The user enteres additional data belonging to the sample.
+- **Save Data** The service task enters the sample information in the LIMS, where it will be used in laboratory processing.
+- **Update order status** The service task updates the status of the order to *Sample Received* in the Order Management System.
+
+If both updates where successful then the process continues.
+
 #### Abort Order
 Throughout the course of the procedure, there are various instances where an order may need to be aborted. These include:
 - Incomplete order forms due to missing data.
@@ -142,8 +153,8 @@ tbd
 |-------------------|---------------------------------------|--------------|
 |registerSample     | sampleId, sampleType                  | <https://hook.eu2.make.com/ycuwr6q9br1a17isbfccp6kpsvvcg3fd> |
 |updateOrderStatus  | orderId, orderStatus                  | <https://hook.eu2.make.com/swvbhj5qjw62gad48ivy6r5704n55662> |
-|abort order        | orderId, sampleId, customerEmail      | https://hook.eu2.make.com/7znnj319uhp4a1xuryaunn87gla72dcf   |
-|notify customer    | orderId, sampleId, customerEmail,<br>orderFromComplete, sampleAcceptanceOk| https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge   |
+|abort order        | orderId, sampleId, customerEmail      | <https://hook.eu2.make.com/7znnj319uhp4a1xuryaunn87gla72dcf>   |
+|notify customer    | orderId, sampleId, customerEmail,<br>orderFromComplete, sampleAcceptanceOk| <https://hook.eu2.make.com/kvpu9ync60hgj1b46ycwzq00rpc0n4ge>   |
 |registerOrderToPIS | sampleId, orderId                             | <https://hook.eu2.make.com/ido2q831oxvbl0pwq4njjbyloh8rneuu> | 
 |registerOrderToOMS | sampleId, orderId, orderStatus, orderInternal | <https://hook.eu2.make.com/4s0vhghjtmba9gshrsm2nk4mznu40yeq> | 
 |checkSample|       sampleType, formfields, sampleAcceptanceOk    | <https://deepnote.com/workspace/digbp-33286cab-ee00-4c9f-a201-adadf03e74e9/project/DigiBIP-Moevenpick-External-Task-13a3d82c-c958-4b10-bb5d-322eec9658e4/notebook/Service%20Integration%20using%20External%20Task-4993c5c6b67645c1b0a57cfbeb0461bc> |
