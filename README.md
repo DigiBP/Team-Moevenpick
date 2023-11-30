@@ -18,7 +18,7 @@
 
 <https://digibp.herokuapp.com/camunda/app/cockpit/default/> with Tennant ID _moevenpick_ the workflow name is _Process_to_be_final_.
 
-## Abstract Project Cescription
+## Abstract Project Description
 
 In an initiative to enhance the workflow at the University Hospital Zurich's Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process. By integrating Camunda's workflow engine, we optimized the preanalytical stages, reducing manual tasks and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
 
@@ -51,13 +51,12 @@ The following steps were undertaken for this project:
 
 The following tools will be used in our project:
 
-**Camunda:** This serves as the core modeling tool and workflow engine. It manages the overall workflow, including orchestration, integration, and communication within the process. Camunda handles various functions, such as webhooks, RESTful APIs, and JavaScript. Additionally, it is responsible for managing external tasks in the workflow.
-
-**Make:** An online automation platform, Make.com plays a major role in coordinating and processing data received from Camunda. It acts as a bridge, particularly between Camunda and Google Sheets, facilitating data transfer and handling the necessary formatting or data transformations. Make.com also automates the task of updating Google Sheets with new data and is utilized for automating email notifications.
-
-**Deepnote:** In this platform, the Python script for the external task worker is developed and executed. This script, specifically designed for the "Calculate Sample Result" task in Camunda, automates decision-making based on predefined criteria for each sample type. It enhances efficiency by automating the manual task of cross-checking a sample against a checklist to assess "Sample Quality" before starting genetic analysis.
-
-**Google Sheets:** Used as a simulated database for storing and organizing data. Each worksheet in Google Sheets represents a different information system, such as the Pathology Information System, Laboratory Information System, and Order Management System.
+| Tools used    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+| :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Camunda       | This serves as the core modeling tool and workflow engine. It manages the overall workflow, including orchestration, integration, and communication within the process. Camunda handles various functions, such as webhooks, RESTful APIs, and JavaScript. Additionally, it is responsible for managing external tasks in the workflow.                                                                                                 |
+| Make          | An online automation platform, Make.com plays a major role in coordinating and processing data received from Camunda. The created make-szenarios act as a bridge, particularly between Camunda and Google Sheets, facilitating data transfer and handling the necessary formatting or data transformations. Make.com also automates the task of updating Google Sheets with new data and is utilized for automated email notifications. |
+| Deepnote      | In this platform, the Python script for the external task worker is developed and executed. This script, specifically designed for the "Calculate Sample Result" task in Camunda, automates decision-making based on predefined criteria for each sample type. It enhances efficiency by automating the manual task of cross-checking a sample against a checklist to assess "Sample Quality" before starting genetic analysis.         |
+| Google Sheets | Tables were used instead of a database for storing and organizing data. Each worksheet in Google Sheets represents/simulates a different database of an information system, such as the Pathology Information System, Laboratory Information System and Order Management System.                                                                                                                                                        |
 
 #### Result and Conclusion
 
