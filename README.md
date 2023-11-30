@@ -32,7 +32,7 @@ In an initiative to enhance the workflow at the University Hospital Zurich's (US
 
 In this project, we confront the challenge of enhancing real-life processes within the Molecular Tumor Profiling (MTP) Laboratory at the University Hospital Zurich (USZ), a central unit in the Pathology Department. The MTP Laboratory plays a crucial role in genetic sequencing analysis, processing various sample types such as formalin-fixed paraffin-embedded (FFPE) blocks, extracted DNA/RNA, blood, and bone marrow samples. In collaboration with other departments at USZ and an external evaluation site, the MTP Laboratory provides essential genetic analysis services, significantly contributing to diagnostics and research. With the advancement of DNA sequencing and complex diagnostic techniques, a deeper understanding of cancer is now more attainable. A well-structured process, from order intake to report delivery, is vital to support physicians and researchers in their work. The University Hospital Zurich, a leader in these diagnostic procedures, has established an "Order to Report" process essential for creating medical reports based on initial orders and subsequent DNA sequencing. We take the "Order to Report" process as the starting point for our project.
 
-#### Goals
+##### Goals
 
 Our project aims to enhance collaboration and data exchange across different stages of the laboratory workflow, striving for a more integrated and responsive system. The goals are:
 
@@ -49,8 +49,6 @@ The following steps were undertaken for this project:
 
 3. Selecting a section of the TO-BE process and using the Camunda workflow to implement automation to address the identified challenges.
 
-#### Tools
-
 The following tools will be used in our project:
 
 | Tools used    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
@@ -60,7 +58,7 @@ The following tools will be used in our project:
 | Deepnote      | In this platform, the Python script for the external task worker is developed and executed. This script, specifically designed for the "Calculate Sample Result" task in Camunda, automates decision-making based on predefined criteria for each sample type. It enhances efficiency by automating the manual task of cross-checking a sample against a checklist to assess "Sample Quality" before starting genetic analysis.         |
 | Google Sheets | Tables were used instead of a database for storing and organizing data. Each worksheet in Google Sheets represents/simulates a different database of an information system, such as the Pathology Information System, Laboratory Information System and Order Management System.                                                                                                                                                        |
 
-#### Results
+#### Results and Conclusion
 
 **Review of the existing situation**
 Our review of the University Hospital Zurich's (USZ) "Order to Report" process revealed a significant reliance on multiple information systems and communication channels. The creation of an AS-IS process Model from this analysis provided a comprehensive view of the existing workflow, covering stages from order and sample registration to processing, analysis, external evaluation, and client reporting (no existing USZ process models were avaliable or used throughout this project). A notable aspect of this process was the presence of multiple branching points and its dependency on several isolated information systems.
