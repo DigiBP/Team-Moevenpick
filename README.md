@@ -1,5 +1,11 @@
 # Team-Moevenpick 🍨
 
+## Abstract Project Description
+
+In an initiative to enhance the workflow at the University Hospital Zurich's (USZ) Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process layed out by the USZ. By integrating Camunda's workflow engine, we optimized the preanalytical stages, reducing manual tasks and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
+
+---
+
 ## Team-Members
 
 | Name            | Email                            |
@@ -9,7 +15,7 @@
 | Denis Moser     | denis.moser@students.fhnw.ch     |
 | Marvin Marqua   | marvin.marqua@students.fhnw.ch   |
 
-**Coach:**
+**Coaches:**
 
 - Andreas Martin
 - Charuta Panda
@@ -17,10 +23,6 @@
 ## Running workflow instance
 
 <https://digibp.herokuapp.com/camunda/app/cockpit/default/> with Tennant ID _moevenpick_ the workflow name is _Process_to_be_final_.
-
-## Abstract Project Description
-
-In an initiative to enhance the workflow at the University Hospital Zurich's Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process. By integrating Camunda's workflow engine, we optimized the preanalytical stages, reducing manual tasks and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
 
 ---
 
@@ -37,13 +39,13 @@ Our project aims to enhance collaboration and data exchange across different sta
 1. To automate process steps that currently involve significant "manual labor".
 2. To eliminate existing "dead ends" in the current processes to improve process quality.
 
-#### Methods
+#### Procedure
 
 The following steps were undertaken for this project:
 
-1. Analysis of the "Order to Report" process in consultation with a project member working at USZ to create an AS-IS BPMN process and identify challenges and optimization opportunities.
+1. Review of the "Order to Report" process in consultation with one project member who is working at USZ to create an AS-IS process model and identify challenges and optimization opportunities.
 
-2. Utilizing insights from the analysis to model a TO-BE BPMN process as a proposal for a more streamlined process.
+2. Utilizing insights from the analysis to model a TO-BE process as a proposal for a more streamlined process.
 
 3. Selecting a section of the TO-BE process and using the Camunda workflow to implement automation to address the identified challenges.
 
@@ -58,19 +60,22 @@ The following tools will be used in our project:
 | Deepnote      | In this platform, the Python script for the external task worker is developed and executed. This script, specifically designed for the "Calculate Sample Result" task in Camunda, automates decision-making based on predefined criteria for each sample type. It enhances efficiency by automating the manual task of cross-checking a sample against a checklist to assess "Sample Quality" before starting genetic analysis.         |
 | Google Sheets | Tables were used instead of a database for storing and organizing data. Each worksheet in Google Sheets represents/simulates a different database of an information system, such as the Pathology Information System, Laboratory Information System and Order Management System.                                                                                                                                                        |
 
-#### Result and Conclusion
+#### Results
 
-Our review of the University Hospital Zurich's (USZ) "Order to Report" process revealed a significant reliance on multiple information systems and communication channels. The creation of an AS-IS Process Model from this analysis provided a comprehensive view of the existing workflow, covering stages from order and sample registration to processing, analysis, external evaluation, and client reporting. A notable aspect of this process was the presence of multiple branching points and its dependency on several isolated information systems.
+**Review of the existing situation**
+Our review of the University Hospital Zurich's (USZ) "Order to Report" process revealed a significant reliance on multiple information systems and communication channels. The creation of an AS-IS process Model from this analysis provided a comprehensive view of the existing workflow, covering stages from order and sample registration to processing, analysis, external evaluation, and client reporting (no existing USZ process models were avaliable or used throughout this project). A notable aspect of this process was the presence of multiple branching points and its dependency on several isolated information systems.
 
-With the **AS-IS** process model, we were able to identify some **key challenges**, including the complexity of the workflow due to diverse departmental information systems, the substantial manual effort required for maintaining data consistency, and if not done correctly could lead to hidden "dead ends" since some tasks are reliant on process data. We also discovered the absence of automated client notifications during intricate DNA analysis stages (preanalytical and analytical).
+**AS-IS & Key Challenges, Issues and Problems**
+With the AS-IS process model, we were able to identify some key challenges, including the complexity of the workflow due to diverse departmental information systems, the substantial manual effort required for maintaining data consistency, and if not done correctly could lead to hidden "dead ends" since some tasks are reliant on process data. We also discovered the absence of automated client notifications during intricate DNA analysis stages (preanalytical and analytical).
 
 In response to these challenges, we identified the need for a more streamlined workflow. We concluded that digitalization could substantially enhance process efficiency by automating manual tasks and ensuring uniform data consistency across all systems. These enhancements aim to quicken the workflow, reduce manual entry errors, and improve overall efficiency. Additionally, given the critical nature of genetic analysis, we implemented an automated notification system for clients in instances of interrupted analyses, thereby improving customer satisfaction with timely communication. Based on these insights, a TO-BE process model was developed.
 
-In this project, we focused on optimizing a specific segment of the **TO-BE** process model, particularly the preanalytical stages and client notification. Utilizing Camunda's workflow engine as the central orchestrating element, we effectively managed and controlled the workflow sequence. This was augmented by integrating **HTTP connectors and external tasks**, enabling the incorporation of external systems such as Make.com and a **Python-based external task worker** developed in Deepnote.
+**TO-BE & Implementation**
+In this project, we focused on optimizing a specific segment of the TO-BE process model, particularly the preanalytical stages and client notification. Utilizing Camunda's workflow engine as the central orchestrating element, we effectively managed and controlled the workflow sequence. This was augmented by integrating HTTP connectors and external tasks, enabling the incorporation of external systems such as Make and a Python-based external task worker developed in Deepnote.
 
-This integration streamlined data transfer and processing, thereby reducing reliance on manual tasks. Potential "dead ends" due to missing data necessary for continuation of certain tasks could also be minimized by improving **data consistency throughout different information systems**. Another critical improvement was the implementation of **automated email notification** through the integration between Camunda and Make.com. This setup enabled the automated generation and dispatch of emails, potentially enhancing client communication efficiency, especially by providing timely updates and status information on DNA analysis in cases where their orders are aborted. Overall, these advancements not only demonstrate that digitalization and integration can lead to a more efficient, precise, and responsive laboratory workflow but also establish a blueprint and a starting point for potential further optimization of laboratory processes in the MTP Lab at the USZ.
+This integration streamlined data transfer and processing, thereby reducing reliance on manual tasks. Potential "dead ends" due to missing data necessary for continuation of certain tasks could also be minimized by improving data consistency throughout different information systems. Another critical improvement was the implementation of automated email notification through the integration between Camunda and Make. This setup enabled the automated generation and dispatch of emails, potentially enhancing client communication efficiency, especially by providing timely updates and status information on DNA analysis in cases where their orders are aborted. Overall, these advancements not only demonstrate that digitalization and integration can lead to a more efficient, precise, and responsive laboratory workflow but also establish a blueprint and a starting point for potential further optimization of laboratory processes in the MTP Lab at the USZ.
 
-More Details can be found in following sections:
+More details can be found in following sections:
 
 ---
 
