@@ -18,7 +18,7 @@
 
 <https://digibp.herokuapp.com/camunda/app/cockpit/default/> with Tennant ID _moevenpick_ the workflow name is _Process_to_be_final_.
 
-## Abstract Project description
+## Abstract Project Cescription
 
 In an initiative to enhance the workflow at the University Hospital Zurich's Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process. By integrating Camunda's workflow engine, we optimized the preanalytical stages, reducing manual tasks and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
 
@@ -26,16 +26,19 @@ In an initiative to enhance the workflow at the University Hospital Zurich's Mol
 
 ## Introduction
 
-###Background
+#### Background
+
 In this project, we confront the challenge of enhancing real-life processes within the Molecular Tumor Profiling (MTP) Laboratory at the University Hospital Zurich (USZ), a central unit in the Pathology Department. The MTP Laboratory plays a crucial role in genetic sequencing analysis, processing various sample types such as formalin-fixed paraffin-embedded (FFPE) blocks, extracted DNA/RNA, blood, and bone marrow samples. In collaboration with other departments at USZ and an external evaluation site, the MTP Laboratory provides essential genetic analysis services, significantly contributing to diagnostics and research. With the advancement of DNA sequencing and complex diagnostic techniques, a deeper understanding of cancer is now more attainable. A well-structured process, from order intake to report delivery, is vital to support physicians and researchers in their work. The University Hospital Zurich, a leader in these diagnostic procedures, has established an "Order to Report" process essential for creating medical reports based on initial orders and subsequent DNA sequencing. We take the "Order to Report" process as the starting point for our project.
 
-####Goals
+#### Goals
+
 Our project aims to enhance collaboration and data exchange across different stages of the laboratory workflow, striving for a more integrated and responsive system. The goals are:
 
 1. To automate process steps that currently involve significant "manual labor".
 2. To eliminate existing "dead ends" in the current processes to improve process quality.
 
-####Methods
+#### Methods
+
 The following steps were undertaken for this project:
 
 1. Analysis of the "Order to Report" process in consultation with a project member working at USZ to create an AS-IS BPMN process and identify challenges and optimization opportunities.
@@ -44,7 +47,8 @@ The following steps were undertaken for this project:
 
 3. Selecting a section of the TO-BE process and using the Camunda workflow to implement automation to address the identified challenges.
 
-####Tools
+#### Tools
+
 The following tools will be used in our project:
 
 **Camunda:** This serves as the core modeling tool and workflow engine. It manages the overall workflow, including orchestration, integration, and communication within the process. Camunda handles various functions, such as webhooks, RESTful APIs, and JavaScript. Additionally, it is responsible for managing external tasks in the workflow.
@@ -55,7 +59,8 @@ The following tools will be used in our project:
 
 **Google Sheets:** Used as a simulated database for storing and organizing data. Each worksheet in Google Sheets represents a different information system, such as the Pathology Information System, Laboratory Information System, and Order Management System.
 
-####Result and Conclusion
+#### Result and Conclusion
+
 Our review of the University Hospital Zurich's (USZ) "Order to Report" process revealed a significant reliance on multiple information systems and communication channels. The creation of an AS-IS Process Model from this analysis provided a comprehensive view of the existing workflow, covering stages from order and sample registration to processing, analysis, external evaluation, and client reporting. A notable aspect of this process was the presence of multiple branching points and its dependency on several isolated information systems.
 
 With the **AS-IS** process model, we were able to identify some **key challenges**, including the complexity of the workflow due to diverse departmental information systems, the substantial manual effort required for maintaining data consistency, and if not done correctly could lead to hidden "dead ends" since some tasks are reliant on process data. We also discovered the absence of automated client notifications during intricate DNA analysis stages (preanalytical and analytical).
