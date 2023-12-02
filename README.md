@@ -1,8 +1,8 @@
 # Team-Moevenpick 🍨
 
-## Abstract Project Description
+## About the Project
 
-In an initiative to enhance the workflow at the University Hospital Zurich's (USZ) Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process layed out by the USZ. By integrating Camunda's workflow engine, we optimized the preanalytical stages, reducing manual tasks and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
+In an initiative to enhance the workflow at the University Hospital Zurich's (USZ) Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process layed out by the USZ. By integrating Camunda's workflow engine, we optimized the preanalytical stages and customer communication, reducing manual data entry and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
 
 ---
 
@@ -34,7 +34,7 @@ If you want to deploy the process you **need to add** the Camunda Form "02_Forms
 
 ---
 
-## Introduction Summary
+## Introduction and Summary
 
 #### Background
 
