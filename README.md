@@ -179,20 +179,21 @@ The TO-BE Process improves the steps from _Order processing_ as described in the
 
 The developed to-be process will end before the analytics steps as it is a cut-out of the complete "Order to Report" process. It should reduce the complexity as well as gain a better overview for the reading user. All of the new developed steps will be described further in the following sections.
 
-#### Process incoming Order
+#### Process incoming order
 
 The Process starts with revieving an order for genetic analysis.
 
-**Order received** In this start event the the clients announcement of an order for genetic analysis is recieved via email by the user in the Patientemanagement-role in the MTP Lab.
+**Order received** In this start event the clients announcement of an order for genetic analysis is recieved via email by the user in the Patientemanagement-role in the MTP Lab.
 
-**Process Order** In this user task the user checks the order for important informations. Here the user uses a form (Generated Task Form) to assign the orderId, sampleId, the customerEmail, and orderInternal (which contains the information if the order is internal or external).
+**Process Order** In this user task the user checks the order for important informations. Here we used a camunda generated task form, where the user can assign the orderId, sampleId, the customerEmail, and orderInternal (which contains the information if the order is internal or external).
 
-**Register Sample Order** Here are two services which send data automatically to the the informations systems involved via http-connector to their respective make-webhook.
-Both services work basically the same, The difference is that different webhooks in make scenarions are connected and difference of which variables are sent to.
+**Register Sample Order** Here are two service tasks, which send data automatically to the the informations systems involved (Pathology and Ordermanagement System). In this project JavaScript formats the data payload for a POST API call, executed through an HTTP connector. This call triggers a make.com scenario via a webhook, automating the addition of this data into a Google Sheet which simulates the database of the Pathology and Ordermanagment System.
 
-Register Sample Order to Pathology System, details:
+_Details: "Register Sample Order" to Pathology System:_
 
-```
+- Payload:
+
+```JSON
 out = JSON.stringify(
 {
     "orderId": orderId,
@@ -202,12 +203,14 @@ out = JSON.stringify(
 );
 ```
 
-<img src="00_Assets/register_order_to_pathologyinformationsystem.png" alt="drawing" width="400"/>
+- Make scenario, triggered by a webhook, automatically adds a row containing the received data:
+  <img src="00_Assets/register_order_to_pathologyinformationsystem.png" alt="drawing" width="400"/>
 
-Register Sample Order to Order Management System, details:
-Here "order receibed" indicates the status of the order.
+_Details: "Register Sample Order" to Ordermanagement System:_
 
-```
+- Payload: Here "order received" indicates the status of the order.
+
+```JSON
 status = "order received"
 out = JSON.stringify(
 {
@@ -219,7 +222,8 @@ out = JSON.stringify(
 );
 ```
 
-<img src="00_Assets/register_order_to_ordermanagementsystem.png" alt="drawing" width="400"/>
+- Make scenario, triggered by a webhook, automatically adds a row containing the received data:
+  <img src="00_Assets/register_order_to_ordermanagementsystem.png" alt="drawing" width="400"/>
 
 #### Process incoming sample
 
