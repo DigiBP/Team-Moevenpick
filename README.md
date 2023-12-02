@@ -188,19 +188,19 @@ The developed to-be process will end before the analytics steps as it is a cut-o
 
 #### Process incoming order
 
-The Process starts with revieving an order for genetic analysis.
+The Process starts with receiving an order for genetic analysis.
 
 **Order received** In this start event the clients announcement of an order for genetic analysis is recieved via email by the user in the Patientemanagement-role in the MTP Lab.
 
 **Process Order** In this user task the user checks the order for important informations. Here we used a camunda generated task form, where the user can assign the orderId, sampleId, the customerEmail, and orderInternal (which contains the information if the order is internal or external).
 
-**Register Sample Order** Here are two service tasks, which send data automatically to the the informations systems involved (Pathology and Ordermanagement System). In this project JavaScript formats the data payload for a POST API call, executed through an HTTP connector. This call triggers a make.com scenario via a webhook, automating the addition of this data into a Google Sheet which simulates the database of the Pathology and Ordermanagment System.
+**Register Sample Order** Here are two service tasks, which send data automatically to the the informations systems involved (Pathology and Ordermanagement System). In this project JavaScript formats the data payload for a POST API call (REST), executed through an HTTP connector. This call triggers a make.com scenario via a webhook, automating the addition of this data into a Google Sheet which simulates the database of the Pathology and Ordermanagment System.
 
 _Details: "Register Sample Order" to Pathology System:_
 
 - Payload:
 
-```JSON
+```
 out = JSON.stringify(
 {
     "orderId": orderId,
@@ -217,7 +217,7 @@ _Details: "Register Sample Order" to Ordermanagement System:_
 
 - Payload: Here "order received" indicates the status of the order.
 
-```JSON
+```
 status = "order received"
 out = JSON.stringify(
 {
