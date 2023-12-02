@@ -322,6 +322,7 @@ With the digitalization of the to-be process are different systems connected to 
 | orderId            | unique order id                         | string    |                       |
 | orderInternal      | true if order is internal               | boolean   |                       |
 | sampleId           | unique sample id                        | string    |                       |
+| orderStatus        | status of the order in the process      | string    |                       |
 | sampleType         | Type of the received sample             | string    | ffpe, dna, bonemarrow |
 | orderFromComplete  | True if order form is complete          | boolean   |                       |
 | sampleAcceptanceOk | true if sample acceptance is fullfilled | boolean   |                       |
@@ -342,6 +343,8 @@ With the digitalization of the to-be process are different systems connected to 
 
 ### Benefits and Improvements
 
+- Improved data consistency across various information systems and reducing user tasks through the use of service integration.
 - Now all SOP criterias are considered for the sample check. Before it was only one value (OK/NOK) which could be processed.
+- Automatic generation and dispatch of emails to customers to inform them when a lab process had to be aborted.
 
 ## Conclusion
