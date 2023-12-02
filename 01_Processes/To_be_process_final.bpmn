@@ -356,7 +356,7 @@ out = JSON.stringify(
       <bpmn:extensionElements />
       <bpmn:outgoing>Flow_1whglpg</bpmn:outgoing>
       <bpmn:timerEventDefinition id="TimerEventDefinition_11frrfc">
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT15S</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P30D</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:boundaryEvent>
     <bpmn:sequenceFlow id="Flow_16d5q8t" sourceRef="Activity_18wb6rs" targetRef="Activity_01hccua" />
