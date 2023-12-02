@@ -25,7 +25,7 @@ In an initiative to enhance the workflow at the University Hospital Zurich's (US
 To Start the Workflow you need to follow those steps: 
 
 1. Open <https://digibp.herokuapp.com/camunda/app/cockpit/default/> with Tennant ID _moevenpick_ the workflow name is _Process_to_be_final_.
-2. Open Deepnote Workbook and Run the the complete Notebook: https://deepnote.com/onboarding?redirectTo=/workspace/digbp-33286cab-ee00-4c9f-a201-adadf03e74e9/project/DigiBIP-Moevenpick-External-Task-13a3d82c-c958-4b10-bb5d-322eec9658e4/notebook/Service%20Integration%20using%20External%20Task-4993c5c6b67645c1b0a57cfbeb0461bc
+2. Open Deepnote Workbook and Run the the complete Notebook: https://deepnote.com/workspace/digbp-33286cab-ee00-4c9f-a201-adadf03e74e9/project/DigiBIP-Moevenpick-External-Task-13a3d82c-c958-4b10-bb5d-322eec9658e4/notebook/Service%20Integration%20using%20External%20Task-4993c5c6b67645c1b0a57cfbeb0461bc
 3. Start process and enter **any** value from 0-100 as Business Key. 
 
 ## Deployment
