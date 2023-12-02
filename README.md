@@ -40,7 +40,7 @@ If you want to deploy the process you **need to add** the Camunda Form "02_Forms
 
 In this project, we confront the challenge of enhancing real-life processes within the Molecular Tumor Profiling (MTP) Laboratory at the University Hospital Zurich (USZ), a central unit in the Pathology Department. The MTP Laboratory plays a crucial role in genetic sequencing analysis, processing various sample types such as formalin-fixed paraffin-embedded (FFPE) blocks, extracted DNA/RNA, blood, and bone marrow samples. In collaboration with other departments at USZ and an external evaluation site, the MTP Laboratory provides essential genetic analysis services, significantly contributing to diagnostics and research. With the advancement of DNA sequencing and complex diagnostic techniques, a deeper understanding of cancer is now more attainable. A well-structured process, from order intake to report delivery, is vital to support physicians and researchers in their work. The University Hospital Zurich, a leader in these diagnostic procedures, has established an "Order to Report" process essential for creating medical reports based on initial orders and subsequent DNA sequencing. We take the "Order to Report" process as the starting point for our project.
 
-#### Goals
+### Goals
 
 Our project aims to enhance collaboration and data exchange across different stages of the laboratory workflow, striving for a more integrated and responsive system. The goals are:
 
