@@ -24,6 +24,10 @@ In an initiative to enhance the workflow at the University Hospital Zurich's (US
 
 <https://digibp.herokuapp.com/camunda/app/cockpit/default/> with Tennant ID _moevenpick_ the workflow name is _Process_to_be_final_.
 
+## Deployment
+
+If you want to deploy the process you __need to add__ the Camunda Form "02_Forms/CheckSampleForm.form" as additional file! Otherwise the process will not recognize the connection between the process and the formular. 
+
 ---
 
 ## Introduction
@@ -150,9 +154,10 @@ This chapter provides the optimized process with the related benefits and improv
 
 ### Process Description
 
-The TO-BE Process improves the steps from _Order processing_ as described in the AS-IS Process. Everything else is out-of-scope for this project.
+The TO-BE Process improves the steps from _Order processing_ as described in the AS-IS Process. To ensure a certain quality of the developed to-be process as well as under the consideration of the available project time we decided to focus only on the above mentioned, _Order processing_ process part. We therefore took the steps from pre-analytics till report generation out of scope.   
 
-make better
+The developed to-be process will end before the analytics steps as it is a cut-out of the complete "Order to Report" process. It should reduce the complexity as well as gain a better overview for the reading user. All of the new developed steps will be described further in the following sections.
+
 
 #### Process incoming sample
 
@@ -164,6 +169,57 @@ After the sample is ordered, the process waits until the sample physically arriv
 - **Update order status** The service task updates the status of the order to _Sample Received_ in the Order Management System.
 
 If both updates where successful then the process continues.
+
+#### Check Sample and Calculate Result
+
+After the sample is successfully registered it needs to be checked against certrain quality or SOP criteria, as they are provided by the Standard Operating Procedure (SOP). After the sample is checked by an employee the data will be send to the next step, the calculation of the final sample result.   
+
+__Check Sample:__    
+This process steps gets the SampleType as input variable. The value can differ between "DNA", "Bone marrow" and "FFPE". The value is passed to a certain Camunda-Form which uses it, to hide certain fields. Therefore we used FEEL Expressions inside the "hide" attribute of the elements.   
+Example:  ``not(contains(field_0a4ef3i,\"bonemarrow\"))``  
+
+The dynamic formular is implemented because not all SampleTypes need to be checked against the same SOP criteria. Thats why the lab technican can only answer the, for the type needed questions. After all questions are answered and the submit button is pressed, the values gets passed to the next steps. 
+
+__Calculate Result:__   
+As the previous step provides multiple answers we need to calculate one final result out of them. Therefore we implemented an external task in python which runs on deepnote. The external Task subscribes the specific topic and sends back one variable with the final value (ok/nok). The source code below shows the business logic which decides wether the sample is ok or not ok. As the fields are only initialized if the related SampleType is given, they can only be used after checking the SampelType value, otherwise the programm will fail as the fields will be "undefined".
+```python
+def calculate_sample_result_callback(self, taskid, response):
+        #Get all variables from message JSON
+        variables = response[0]['variables']
+        data = variables
+        #Save values from previous formular 
+        value_field_0u913tf_tumor_content = data['field_0u913tf_tumor_content']['value']
+        value_SampleType = data['sampleType']['value'] 
+        #Check if sampleType is FFPE, BONEMARROW, DNA and save related values which are created and send dynamically        
+        if value_SampleType == 'ffpe':
+            value_field_1wbwwxu_ffpe_tubes = data['field_1wbwwxu_ffpe_tubes']['value']
+            value_field_1pjgpqw_ffpe_slices = data['field_1pjgpqw_ffpe_slices']['value']
+            if value_field_1wbwwxu_ffpe_tubes and value_field_0u913tf_tumor_content == 'true' and value_field_1pjgpqw_ffpe_slices:        
+                result = True            
+            else:                
+                result = False
+        elif value_SampleType == 'bonemarrow':
+            value_field_0zz95a6_bone_time = data['field_0zz95a6_bone_time']['value']
+            value_field_1jaxerq_bone_volume = data['field_1jaxerq_bone_volume']['value']
+            if value_field_0zz95a6_bone_time and value_field_0u913tf_tumor_content == 'true' and value_field_1jaxerq_bone_volume:       
+                result = True            
+            else:                
+                result = False        
+        elif value_SampleType == 'dna':            
+            value_field_1crldde_dna_time = data['field_1crldde_dna_time']['value']            
+            value_field_152dkxm_dna_yield = data['field_152dkxm_dna_yield']['value']            
+            value_field_1unglw5_dna_volume = data['field_1unglw5_dna_volume']['value']            
+            if value_field_1crldde_dna_time and value_field_0u913tf_tumor_content == 'true' and value_field_152dkxm_dna_yield and value_field_1unglw5_dna_volume:
+                result = True            
+            else:                
+                result = False        
+        else:            
+            result = False                
+        
+        #Create variable sampleAcceptanceOk and assign the result as value        
+        variables = {"sampleAcceptanceOk": result}        
+        self.worker.complete(taskid, **variables)
+```
 
 #### Abort Order
 
@@ -177,13 +233,15 @@ If a reason to abort the order occurs, the process transitions to the user task 
 
 ### Process Model
 
-tbd
+![to-be process model](00_Assets/TO-BE.svg)
 
 ### Architecture
 
-tbd
+With the digitalization of the to-be process are different systems connected to the orchestrator, Camunda. The exact architecture of the system can be found below.  
 
-#### Process variables
+![system architecture](00_Assets/Architecture.png)
+
+### Process variables
 
 | Variable           | Description                             | Data Type |                       |
 | ------------------ | --------------------------------------- | --------- | --------------------- |
@@ -209,5 +267,7 @@ tbd
 | checkSample        | sampleType, formfields, sampleAcceptanceOk                                 | <https://deepnote.com/workspace/digbp-33286cab-ee00-4c9f-a201-adadf03e74e9/project/DigiBIP-Moevenpick-External-Task-13a3d82c-c958-4b10-bb5d-322eec9658e4/notebook/Service%20Integration%20using%20External%20Task-4993c5c6b67645c1b0a57cfbeb0461bc> |
 
 ### Benefits and Improvements
+
+- Now all SOP criterias are considered for the sample check. Before it was only one value (OK/NOK) which could be processed.
 
 ## Conclusion
