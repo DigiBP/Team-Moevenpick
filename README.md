@@ -45,17 +45,19 @@ Our project aims to enhance collaboration and data exchange across different sta
 
 #### Procedure
 
-The following steps were undertaken for this project:
+**The following steps were undertaken in this project:**
 
-1. Review of the "Order to Report" process in consultation with one project member who is working at USZ to create an AS-IS process model and identify challenges and optimization opportunities.
+1. Review of the existing USZ "Order to Report" process in consultation with one project member who is working at USZ.
 
-2. Utilizing insights from the analysis to model a TO-BE process as a proposal for a more streamlined process.
+2. Create an AS-IS process model and identify challenges and optimization opportunities.
 
-3. Selecting a section of the TO-BE process and using the Camunda workflow to implement automation to address the identified challenges.
+3. Utilizing insights from the analysis to model a TO-BE process as a proposal for a more streamlined process.
 
-The following tools will be used in our project:
+4. Selecting a section of the TO-BE process and using the Camunda workflow to implement automation to address the identified challenges.
 
-| Tools used    | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
+**The following tools were used:**
+
+| Tools         | Description                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | :------------ | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Camunda       | This serves as the core modeling tool and workflow engine. It manages the overall workflow, including orchestration, integration, and communication within the process. Camunda handles various functions, such as webhooks, RESTful APIs, and JavaScript. Additionally, it is responsible for managing external tasks in the workflow.                                                                                                 |
 | Make          | An online automation platform, Make.com plays a major role in coordinating and processing data received from Camunda. The created make-szenarios act as a bridge, particularly between Camunda and Google Sheets, facilitating data transfer and handling the necessary formatting or data transformations. Make.com also automates the task of updating Google Sheets with new data and is utilized for automated email notifications. |
@@ -68,9 +70,9 @@ The following tools will be used in our project:
 Our review of the University Hospital Zurich's (USZ) "Order to Report" process revealed a significant reliance on multiple information systems and communication channels. The creation of an AS-IS process Model from this analysis provided a comprehensive view of the existing workflow, covering stages from order and sample registration to processing, analysis, external evaluation, and client reporting (no existing USZ process models were avaliable or used throughout this project). A notable aspect of this process was the presence of multiple branching points and its dependency on several isolated information systems.
 
 **AS-IS & Key Challenges, Issues and Problems**
-With the AS-IS process model, we were able to identify some key challenges, including the complexity of the workflow due to diverse departmental information systems, the substantial manual effort required for maintaining data consistency, and if not done correctly could lead to hidden "dead ends" since some tasks are reliant on process data. We also discovered the absence of automated client notifications during intricate DNA analysis stages (preanalytical and analytical).
+With the AS-IS process model, we were able to identify some key challenges, including the complexity of the workflow due to diverse departmental information systems, the substantial manual effort (User Tasks) required for maintaining data consistency, and if not done correctly could lead to hidden "dead ends" since some tasks are reliant on process data. We also discovered the absence of automated client notifications during intricate DNA analysis stages (preanalytical and analytical).
 
-In response to these challenges, we identified the need for a more streamlined workflow. We concluded that digitalization could substantially enhance process efficiency by automating manual tasks and ensuring uniform data consistency across all systems. These enhancements aim to quicken the workflow, reduce manual entry errors, and improve overall efficiency. Additionally, given the critical nature of genetic analysis, we implemented an automated notification system for clients in instances of interrupted analyses, thereby improving customer satisfaction with timely communication. Based on these insights, a TO-BE process model was developed.
+In response to these challenges, we identified the need for a more streamlined workflow. We concluded that digitalization could substantially enhance process efficiency by automating manual tasks and ensuring uniform data consistency across all systems. These enhancements aim to quicken the workflow, reduce manual entry errors, and improve overall efficiency. Additionally, given the critical nature of genetic analysis, we decided that an automated notification system for clients, in instances of interrupted analyses, could improve customer satisfaction with timely communication. Based on these insights, a TO-BE process model was developed.
 
 **TO-BE & Implementation**
 In this project, we focused on optimizing a specific segment of the TO-BE process model, particularly the preanalytical stages and client notification. Utilizing Camunda's workflow engine as the central orchestrating element, we effectively managed and controlled the workflow sequence. This was augmented by integrating HTTP connectors and external tasks, enabling the incorporation of external systems such as Make and a Python-based external task worker developed in Deepnote.
@@ -83,11 +85,27 @@ More details can be found in following sections:
 
 ## AS-IS Process
 
-This chapter provides insights into the AS-IS process and its identified issues. This Model is based on "Order to Report" process from the USZ.
+The AS-IS model outlines the 'Order to Report' process at USZ, encompassing preanalytical (e.g. ordering, logistics, preparation, registering), analytical (e.g. pre-analysis, DNA/RNA extraction, sequencing, analysis and validation of results), and postanalytical stages (e.g. reporting), with tasks distributed among various actors across different distinct departments or facilities in this setting.
 
 ### Process Model
 
+The complex process is simplified through subtasks, with some roles and interactions represented in empty pools. This approach was chosen **to focus onto key activities in the MTP Lab** and essential inter-organizational message flows.
+
 ![as-is process model](00_Assets/AS-IS_Process.png)
+
+### Pools
+
+These pools represent different participants or entities involved in the process:
+
+**Pathology USZ:** A unit responsible for receiving, preparing, and distributing samples to various lab facilities, including the MTP lab, during the preanalytical stages.
+
+**MTP Labor USZ:** The central processing unit accountable for genetic analysis.
+
+**FMI (External Lab/Partner):** An external partner facility tasked with post-processing analysis data.
+
+**Oncology:** An internal client that sends samples and requests genetic analysis within USZ.
+
+**External Customer:** An external client that places orders for genetic analysis from outside USZ. Typically, a sample extraction kit is sent to them following the order announcement.
 
 ### Roles
 
@@ -103,7 +121,7 @@ _Clinical Operations_ Responsible for correct creation of analytical reports tha
 
 ### Process Description
 
-The process start with an internal or external client sending a request for a disgnosis order by email to the mailbox of the lab.
+The process start with an internal or external client sending a request for a diagnosis order by email to the mailbox of the lab.
 
 #### Order processing
 
@@ -141,9 +159,12 @@ The process start with an internal or external client sending a request for a di
 
 The abort order process can be triggered by multiple processes if e.g. the order form is uncomplete or missing for too long. Or if the sample fails in the lab process.
 
-### Identified Issues and Problems
+### Identified Challenges, Issues and Problems
+
+The AS-IS process is characterized by its complexity and distribution across various participants in different locations, each utilizing different information systems. The primary challenge in this setup is ensuring data consistency, leading to issues, problems, and opportunities to achieve our goals:
 
 - The order is digitally processed in different systems. The user has to use different systems and even copy certain data from one system to another by hand. A workflow management system could be used to centralize the workflow implementation and provide a single user interface to do the work.
+
 - Updating the order status has to be done by hand and needs to be automatized. This includes cancelling or aborting a order.
 
 ---
