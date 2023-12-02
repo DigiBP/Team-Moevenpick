@@ -26,7 +26,7 @@ In an initiative to enhance the workflow at the University Hospital Zurich's (US
 
 ## Deployment
 
-If you want to deploy the process you __need to add__ the Camunda Form "02_Forms/CheckSampleForm.form" as additional file! Otherwise the process will not recognize the connection between the process and the formular. 
+If you want to deploy the process you **need to add** the Camunda Form "02_Forms/CheckSampleForm.form" as additional file! Otherwise the process will not recognize the connection between the process and the formular.
 
 ---
 
@@ -97,27 +97,27 @@ The complex process is simplified through subtasks, with some roles and interact
 
 These pools represent different participants or entities involved in the process:
 
-**Pathology USZ:** A unit responsible for receiving, preparing, and distributing samples to various lab facilities, including the MTP lab, during the preanalytical stages.
+**Pathology USZ** A unit responsible for receiving, preparing, and distributing samples to various lab facilities, including the MTP lab, during the preanalytical stages.
 
-**MTP Labor USZ:** The central processing unit accountable for genetic analysis.
+**MTP Labor USZ** The central processing unit accountable for genetic analysis.
 
-**FMI (External Lab/Partner):** An external partner facility tasked with post-processing analysis data.
+**FMI (External Lab/Partner)** An external partner facility tasked with post-processing analysis data.
 
-**Oncology:** An internal client that sends samples and requests genetic analysis within USZ.
+**Oncology** An internal client that sends samples and requests genetic analysis within USZ.
 
-**External Customer:** An external client that places orders for genetic analysis from outside USZ. Typically, a sample extraction kit is sent to them following the order announcement.
+**External Customer** An external client that places orders for genetic analysis from outside USZ. Typically, a sample extraction kit is sent to them following the order announcement.
 
 ### Roles
 
-_Patient Management_ The patient management is responsible taking care of administrative task regarding lab work such as processing orders and checking the order contains all necessary information.
+**Patient Management** The patient management is responsible taking care of administrative task regarding lab work such as processing orders and checking the order contains all necessary information.
 
-_Accessioning_ The accessioning responsible is handling incoming samples including tasks such as registrate and check samples.
+**Accessioning** The accessioning responsible is handling incoming samples including tasks such as registrate and check samples.
 
-_Lab technician_ The lab technician is doing the actual work in the lab by processing the samples.
+**Lab technician** The lab technician is doing the actual work in the lab by processing the samples.
 
-_Bio informatics_ Runs algorithms on the sequenced data from the lab.
+**Bio informatics** Runs algorithms on the sequenced data from the lab.
 
-_Clinical Operations_ Responsible for correct creation of analytical reports that will be sent to the client.
+**Clinical Operations** Responsible for correct creation of analytical reports that will be sent to the client.
 
 ### Process Description
 
@@ -175,10 +175,51 @@ This chapter provides the optimized process with the related benefits and improv
 
 ### Process Description
 
-The TO-BE Process improves the steps from _Order processing_ as described in the AS-IS Process. To ensure a certain quality of the developed to-be process as well as under the consideration of the available project time we decided to focus only on the above mentioned, _Order processing_ process part. We therefore took the steps from pre-analytics till report generation out of scope.   
+The TO-BE Process improves the steps from _Order processing_ as described in the AS-IS Process. To ensure a certain quality of the developed to-be process as well as under the consideration of the available project time we decided to focus only on the above mentioned, _Order processing_ process part. We therefore took the steps from pre-analytics till report generation out of scope.
 
 The developed to-be process will end before the analytics steps as it is a cut-out of the complete "Order to Report" process. It should reduce the complexity as well as gain a better overview for the reading user. All of the new developed steps will be described further in the following sections.
 
+#### Process incoming Order
+
+The Process starts with revieving an order for genetic analysis.
+
+**Order received** In this start event the the clients announcement of an order for genetic analysis is recieved via email by the user in the Patientemanagement-role in the MTP Lab.
+
+**Process Order** In this user task the user checks the order for important informations. Here the user uses a form (Generated Task Form) to assign the orderId, sampleId, the customerEmail, and orderInternal (which contains the information if the order is internal or external).
+
+**Register Sample Order** Here are two services which send data automatically to the the informations systems involved via http-connector to their respective make-webhook.
+Both services work basically the same, The difference is that different webhooks in make scenarions are connected and difference of which variables are sent to.
+
+Register Sample Order to Pathology System, details:
+
+```
+out = JSON.stringify(
+{
+    "orderId": orderId,
+    "sampleId": sampleId,
+    "orderInternal": orderInternal
+}
+);
+```
+
+<img src="00_Assets/register_order_to_pathologyinformationsystem.png" alt="drawing" width="400"/>
+
+Register Sample Order to Order Management System, details:
+Here "order receibed" indicates the status of the order.
+
+```
+status = "order received"
+out = JSON.stringify(
+{
+    "orderId": orderId,
+    "sampleId" : sampleId,
+    "orderInternal": orderInternal,
+    "orderStatus" : status
+}
+);
+```
+
+<img src="00_Assets/register_order_to_ordermanagementsystem.png" alt="drawing" width="400"/>
 
 #### Process incoming sample
 
@@ -193,52 +234,53 @@ If both updates where successful then the process continues.
 
 #### Check Sample and Calculate Result
 
-After the sample is successfully registered it needs to be checked against certrain quality or SOP criteria, as they are provided by the Standard Operating Procedure (SOP). After the sample is checked by an employee the data will be send to the next step, the calculation of the final sample result.   
+After the sample is successfully registered it needs to be checked against certrain quality or SOP criteria, as they are provided by the Standard Operating Procedure (SOP). After the sample is checked by an employee the data will be send to the next step, the calculation of the final sample result.
 
-__Check Sample:__    
-This process steps gets the SampleType as input variable. The value can differ between "DNA", "Bone marrow" and "FFPE". The value is passed to a certain Camunda-Form which uses it, to hide certain fields. Therefore we used FEEL Expressions inside the "hide" attribute of the elements.   
-Example:  ``not(contains(field_0a4ef3i,\"bonemarrow\"))``  
+**Check Sample:**  
+This process steps gets the SampleType as input variable. The value can differ between "DNA", "Bone marrow" and "FFPE". The value is passed to a certain Camunda-Form which uses it, to hide certain fields. Therefore we used FEEL Expressions inside the "hide" attribute of the elements.  
+Example: `not(contains(field_0a4ef3i,\"bonemarrow\"))`
 
-The dynamic formular is implemented because not all SampleTypes need to be checked against the same SOP criteria. Thats why the lab technican can only answer the, for the type needed questions. After all questions are answered and the submit button is pressed, the values gets passed to the next steps. 
+The dynamic formular is implemented because not all SampleTypes need to be checked against the same SOP criteria. Thats why the lab technican can only answer the, for the type needed questions. After all questions are answered and the submit button is pressed, the values gets passed to the next steps.
 
-__Calculate Result:__   
+**Calculate Result:**  
 As the previous step provides multiple answers we need to calculate one final result out of them. Therefore we implemented an external task in python which runs on deepnote. The external Task subscribes the specific topic and sends back one variable with the final value (ok/nok). The source code below shows the business logic which decides wether the sample is ok or not ok. As the fields are only initialized if the related SampleType is given, they can only be used after checking the SampelType value, otherwise the programm will fail as the fields will be "undefined".
+
 ```python
 def calculate_sample_result_callback(self, taskid, response):
         #Get all variables from message JSON
         variables = response[0]['variables']
         data = variables
-        #Save values from previous formular 
+        #Save values from previous formular
         value_field_0u913tf_tumor_content = data['field_0u913tf_tumor_content']['value']
-        value_SampleType = data['sampleType']['value'] 
-        #Check if sampleType is FFPE, BONEMARROW, DNA and save related values which are created and send dynamically        
+        value_SampleType = data['sampleType']['value']
+        #Check if sampleType is FFPE, BONEMARROW, DNA and save related values which are created and send dynamically       
         if value_SampleType == 'ffpe':
             value_field_1wbwwxu_ffpe_tubes = data['field_1wbwwxu_ffpe_tubes']['value']
             value_field_1pjgpqw_ffpe_slices = data['field_1pjgpqw_ffpe_slices']['value']
-            if value_field_1wbwwxu_ffpe_tubes and value_field_0u913tf_tumor_content == 'true' and value_field_1pjgpqw_ffpe_slices:        
-                result = True            
-            else:                
+            if value_field_1wbwwxu_ffpe_tubes and value_field_0u913tf_tumor_content == 'true' and value_field_1pjgpqw_ffpe_slices:       
+                result = True           
+            else:               
                 result = False
         elif value_SampleType == 'bonemarrow':
             value_field_0zz95a6_bone_time = data['field_0zz95a6_bone_time']['value']
             value_field_1jaxerq_bone_volume = data['field_1jaxerq_bone_volume']['value']
-            if value_field_0zz95a6_bone_time and value_field_0u913tf_tumor_content == 'true' and value_field_1jaxerq_bone_volume:       
-                result = True            
-            else:                
-                result = False        
-        elif value_SampleType == 'dna':            
-            value_field_1crldde_dna_time = data['field_1crldde_dna_time']['value']            
-            value_field_152dkxm_dna_yield = data['field_152dkxm_dna_yield']['value']            
-            value_field_1unglw5_dna_volume = data['field_1unglw5_dna_volume']['value']            
+            if value_field_0zz95a6_bone_time and value_field_0u913tf_tumor_content == 'true' and value_field_1jaxerq_bone_volume:   
+                result = True           
+            else:               
+                result = False       
+        elif value_SampleType == 'dna':           
+            value_field_1crldde_dna_time = data['field_1crldde_dna_time']['value']           
+            value_field_152dkxm_dna_yield = data['field_152dkxm_dna_yield']['value']           
+            value_field_1unglw5_dna_volume = data['field_1unglw5_dna_volume']['value']           
             if value_field_1crldde_dna_time and value_field_0u913tf_tumor_content == 'true' and value_field_152dkxm_dna_yield and value_field_1unglw5_dna_volume:
-                result = True            
-            else:                
-                result = False        
-        else:            
-            result = False                
-        
-        #Create variable sampleAcceptanceOk and assign the result as value        
-        variables = {"sampleAcceptanceOk": result}        
+                result = True           
+            else:               
+                result = False       
+        else:           
+            result = False               
+
+        #Create variable sampleAcceptanceOk and assign the result as value       
+        variables = {"sampleAcceptanceOk": result}       
         self.worker.complete(taskid, **variables)
 ```
 
@@ -258,7 +300,7 @@ If a reason to abort the order occurs, the process transitions to the user task 
 
 ### Architecture
 
-With the digitalization of the to-be process are different systems connected to the orchestrator, Camunda. The exact architecture of the system can be found below.  
+With the digitalization of the to-be process are different systems connected to the orchestrator, Camunda. The exact architecture of the system can be found below.
 
 ![system architecture](00_Assets/Architecture.png)
 
