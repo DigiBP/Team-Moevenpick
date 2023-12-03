@@ -4,8 +4,6 @@
 
 In an initiative to enhance the workflow at the University Hospital Zurich's (USZ) Molecular Tumor Profiling (MTP) Laboratory, our project focused on digitalizing and streamlining key processes. We tackled the challenges posed by the reliance on multiple, isolated information systems and the extensive manual labor required in the "Order to Report" process layed out by the USZ. By integrating Camunda's workflow engine, we optimized the preanalytical stages and customer communication, reducing manual data entry and improving data consistency. This was augmented by incorporating tools like Make.com for automated data processing and client communication, and Deepnote for executing Python scripts for specialized tasks. Our efforts culminated in a more efficient, precise, and responsive workflow, setting a blueprint for further optimizing laboratory processes and enhancing client communication, particularly in cases of interrupted DNA analyses. This project demonstrates the potential of digitalization and system integration in transforming complex healthcare workflows.
 
----
-
 ## Team-Members
 
 | Name            | Email                            |
@@ -348,3 +346,17 @@ With the digitalization of the to-be process are different systems connected to 
 - Automatic generation and dispatch of emails to customers to inform them when a lab process had to be aborted.
 
 ## Conclusion
+
+---
+
+## Links and Artifacts
+
+| Object                      | Access                                                                                                                                                                                                                                            | Comments                                              |
+| :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | :---------------------------------------------------- |
+| BPMN Models                 | https://github.com/DigiBP/Team-Moevenpick/tree/main/01_Processes                                                                                                                                                                                  | AS-IS, TO-BE                                          |
+| Make Scenarios              | https://github.com/DigiBP/Team-Moevenpick/tree/main/04_Make_Scenarios                                                                                                                                                                             | JSON exports from make                                |
+| Custom Form                 | https://github.com/DigiBP/Team-Moevenpick/tree/main/02_Forms                                                                                                                                                                                      |                                                       |
+| Python Service, script      | https://github.com/DigiBP/Team-Moevenpick/tree/main/05_Python_Services                                                                                                                                                                            |                                                       |
+| Deepnote with Python script | https://deepnote.com/workspace/digbp-33286cab-ee00-4c9f-a201-adadf03e74e9/project/DigiBIP-Moevenpick-External-Task-13a3d82c-c958-4b10-bb5d-322eec9658e4/notebook/Service%20Integration%20using%20External%20Task-4993c5c6b67645c1b0a57cfbeb0461bc | External Task                                         |
+| Camunda Worfklow            | https://digibp.herokuapp.com/camunda/app/cockpit/default/                                                                                                                                                                                         | Tennant ID: moevenpick, Workflow: Process_to_be_final |
+| Presentation Slides         | https://fhnw365-my.sharepoint.com/:p:/r/personal/denis_moser_students_fhnw_ch/Documents/DigiBusinessProcess-Presentation.pptx?d=w68d68d0c175e41ceaafce6ac64069ea7&csf=1&web=1&e=9xQ6Uf                                                            |                                                       |
