@@ -313,7 +313,7 @@ If a reason to abort the order occurs, the process transitions to the user task 
 
 - Example Email for Client Notification about Order Abort
 
-  <img src="00_Assets/Example_email_notification_abort.png" alt="drawing" width="400"/>
+  <img src="00_Assets/Example_email_notification_abort.png" alt="drawing" width="800"/>
 
 
 ### Process Model
