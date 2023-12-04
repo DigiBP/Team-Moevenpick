@@ -361,8 +361,11 @@ With the digitalization of the to-be process are different systems connected to 
 ## Conclusion
 
 In a testing laboratory which receives samples from a lot of different clients internal as well as external it is important to have a good system to handle the order to report process well and to automate as many tasks as possible. Especially in a lab like the Molecular Tumor Profiling (MTP) Laboratory where the quality of the work being done has a great impact on a patient’s treatment, it is key to reduce the administrative burden for the employees in order for them to focus on the important tasks.
+
 As a first step in our project the as-is process was modeled to analyze where the biggest potential for improvement laid. As the process is rather big, we wanted to focus in this project on the preanalytical stages starting from receiving the order, to order registration and sample registration, as well as handling order cancellation.
+
 One key aspect we identified was to implement a tracking system to know the status of an order or sample at any time. Furthermore, at the moment there are three systems that employees need to access to fill in data, the Pathology Information System, Laboratory Information System and Order Management System, the goal was to use one central user interface. Other identified aspects to improve were the digitization of the sample acceptance criteria check and automatic handling of order cancellation in the system and subsequent notification of the client.
+
 After modeling the to-be process using BPMN and defining the necessary process variables each team member was tasked with improving one part of the identified process. Using camunda as orchestrator and central user interface the tracking of the order/sample status as well as omitting the need to log into several systems was realized. The service tasks were successfully implemented using Make Scenarios, Deepnote, Python script, Google Sheets and Gmail.
 
 Implementing the to-be process could enhance the experience of the employees and clients involved in this workflow. Better overview of the status of each order/sample as well as more efficient handling of administrative tasks could save time, reduce errors and cost and improve quality.
