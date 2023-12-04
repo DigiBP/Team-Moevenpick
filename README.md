@@ -310,7 +310,11 @@ If a reason to abort the order occurs, the process transitions to the user task 
 - Notify Client Make Scenario: triggered by a webhook, informs the customer about the cancellation of the order. This is done by sending an automatically generated email containing orderID, sampleID and failureReason.
 
   <img src="00_Assets/Make_screenshot_notify_customer2.png" alt="drawing" width="400"/>
-  
+
+- Example Email for Client Notification about Order Abort
+
+  <img src="00_Assets/Example_email_notification_abort.png" alt="drawing" width="400"/>
+
 
 ### Process Model
 
