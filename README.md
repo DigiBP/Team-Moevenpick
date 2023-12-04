@@ -304,7 +304,13 @@ Throughout the course of the procedure, there are various instances where an ord
 If a reason to abort the order occurs, the process transitions to the user task 'approve order abort.' The lab's head assesses the validity of the abortion and adjusts the automatically passed failure reason if necessary. Once the validation is complete, the order abortion is automatically recorded in the system, and the client is promptly notified through an automatically generated email. Subsequently, the entire process is terminated.
 
 - Abort Order Make Scenario: triggered by a webhook, looks for entry (row) of corresponding sampleID and automatically updates orderStatus to aborted.
+
   <img src="00_Assets/Make_screenshot_abort_order.png" alt="drawing" width="400"/>
+
+- Notify Client Make Scenario: triggered by a webhook, informs the customer about the cancellation of the order. This is done by sending an automatically generated email containing orderID, sampleID and failureReason.
+
+  <img src="00_Assets/Make_screenshot_notify_customer2.png" alt="drawing" width="400"/>
+  
 
 ### Process Model
 
