@@ -318,7 +318,7 @@ If a reason to abort the order occurs, the process transitions to the user task 
 
 ### Process Model
 
-![to-be process model](00_Assets/TO-BE.svg)
+![to-be process model](00_Assets/TO-BE_Process.png)
 
 ### Architecture
 

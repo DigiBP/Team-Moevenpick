@@ -16,11 +16,11 @@
         <bpmn:flowNodeRef>Gateway_0vyzm92</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_12q9xor</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_08bjplg</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Activity_0jz59g1</bpmn:flowNodeRef>
-        <bpmn:flowNodeRef>Event_0amlt92</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_1aalk1t</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Gateway_0mhq8vd</bpmn:flowNodeRef>
         <bpmn:flowNodeRef>Activity_0obx9f6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Activity_0jz59g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_0amlt92</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="Lane_0g3gnqk" name="Accessioning">
         <bpmn:flowNodeRef>Activity_01hccua</bpmn:flowNodeRef>
@@ -245,17 +245,6 @@ out = JSON.stringify(
       <bpmn:incoming>Flow_14whtb4</bpmn:incoming>
       <bpmn:outgoing>Flow_0e23s87</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:manualTask id="Activity_0jz59g1" name="Dummy Send Extraction Kit">
-      <bpmn:incoming>Flow_03ffq8p</bpmn:incoming>
-      <bpmn:outgoing>Flow_1hect8c</bpmn:outgoing>
-      <bpmn:dataOutputAssociation id="DataOutputAssociation_099ql52">
-        <bpmn:targetRef>DataStoreReference_0p4253j</bpmn:targetRef>
-      </bpmn:dataOutputAssociation>
-    </bpmn:manualTask>
-    <bpmn:endEvent id="Event_0amlt92" name="Complete sample analysis">
-      <bpmn:incoming>Flow_0e23s87</bpmn:incoming>
-      <bpmn:terminateEventDefinition id="TerminateEventDefinition_1pxhgfr" />
-    </bpmn:endEvent>
     <bpmn:parallelGateway id="Gateway_1aalk1t">
       <bpmn:incoming>Flow_1hpfi89</bpmn:incoming>
       <bpmn:incoming>Flow_0rpy2x8</bpmn:incoming>
@@ -418,6 +407,25 @@ out = JSON.stringify(
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="Flow_0g3n728" sourceRef="Activity_03mbemt" targetRef="Activity_1k0ga80" />
     <bpmn:sequenceFlow id="Flow_17ahkh3" sourceRef="Activity_1k0ga80" targetRef="Gateway_0z3kfy4" />
+    <bpmn:userTask id="Activity_0jz59g1" name="Send Extraction Kit">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="KitSent" label="Kit sent?" type="boolean" />
+        </camunda:formData>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="KitSent">true</camunda:inputParameter>
+          <camunda:outputParameter name="KitSent" />
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_03ffq8p</bpmn:incoming>
+      <bpmn:outgoing>Flow_1hect8c</bpmn:outgoing>
+      <bpmn:dataOutputAssociation id="DataOutputAssociation_099ql52">
+        <bpmn:targetRef>DataStoreReference_0p4253j</bpmn:targetRef>
+      </bpmn:dataOutputAssociation>
+    </bpmn:userTask>
+    <bpmn:endEvent id="Event_0amlt92" name="Complete sample analysis">
+      <bpmn:incoming>Flow_0e23s87</bpmn:incoming>
+    </bpmn:endEvent>
     <bpmn:textAnnotation id="TextAnnotation_1egafhq">
       <bpmn:text>User only registers data into formular which then will be transformed per Receiver as well as sent to Lims and OMS automatically.
 
@@ -531,15 +539,6 @@ out = JSON.stringify(
       <bpmndi:BPMNShape id="Gateway_0cwt635_di" bpmnElement="Gateway_08bjplg">
         <dc:Bounds x="2085" y="1595" width="50" height="50" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0tn8fg6_di" bpmnElement="Activity_0jz59g1">
-        <dc:Bounds x="1050" y="1380" width="100" height="80" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0wnv727_di" bpmnElement="Event_0amlt92">
-        <dc:Bounds x="3082" y="1602" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="3060" y="1645" width="86" height="27" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_00z4lla_di" bpmnElement="Gateway_1aalk1t">
         <dc:Bounds x="835" y="1235" width="50" height="50" />
       </bpmndi:BPMNShape>
@@ -579,6 +578,16 @@ out = JSON.stringify(
       <bpmndi:BPMNShape id="TextAnnotation_1egafhq_di" bpmnElement="TextAnnotation_1egafhq">
         <dc:Bounds x="1389" y="380" width="220" height="122" />
         <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03wp8n7_di" bpmnElement="Activity_0jz59g1">
+        <dc:Bounds x="1050" y="1380" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0he4khm_di" bpmnElement="Event_0amlt92">
+        <dc:Bounds x="3082" y="1602" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3060" y="1645" width="86" height="27" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0gprey8_di" bpmnElement="Event_14roj15">
         <dc:Bounds x="1331" y="619" width="36" height="36" />
